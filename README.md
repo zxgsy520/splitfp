@@ -9,7 +9,7 @@ chmod 755 -R *
 </code></pre>
 
 ## Instructions
-<p><a>usage: splitfp [-h] -i FILE [-w FILE] [-n INT] [-o STR] 
+<pre><code>usage: splitfp [-h] -i FILE [-w FILE] [-n INT] [-o STR] 
 
 name: 
     splitfp.py  Split a specific format for multiple files. 
@@ -29,4 +29,6 @@ optional arguments:
                         Set the output file path, default=. 
   -n INT, --number INT  Set the number of reads after splitting the file, 
                         default=200000 
-  -o STR, --out STR     Set the prefix of the output file. </a></p>
+  -o STR, --out STR     Set the prefix of the output file. 
+  ./splitfp -h
+</code></pre>
