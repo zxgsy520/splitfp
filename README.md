@@ -1,6 +1,6 @@
 # Splitfp can mainly split multiple fastq or fasta files by the specified number of reads.
 ## Installation
-wget https://github.com/caonimademimi/splitfp/blob/master/splitfp.tar.gz \
+<p><a>wget https://github.com/caonimademimi/splitfp/blob/master/splitfp.tar.gz </a></p>
 tar -zxvf splitfp.tar.gz \
 cd splitfp \
 chmod 755 -R * \
