@@ -3,14 +3,14 @@ Splitfp is a software that can split the second and third generation sequencing 
 ## Installation
 Installation method 1
 <pre><code>
-git clone https://github.com/caonimademimi/splitfp.git
+git clone https://github.com/zxgsy520/splitfp.git
 cd splitfp
 chmod 755 splitfp
 </code></pre>
 
 Installation method 2
 <pre><code>
-wget https://github.com/caonimademimi/splitfp/archive/v1.1.0.tar.gz
+wget https://github.com/zxgsy520/splitfp/archive/v1.1.0.tar.gz
 tar -zxvf v1.1.0.tar.gz
 cd splitfp 
 chmod 755 splitfp
