@@ -7,13 +7,13 @@ git clone https://github.com/caonimademimi/splitfp.git
 cd splitfp
 chmod 755 splitfp
 </code></pre>
+
 Installation method 2
 <pre><code>
-wget https://github.com/caonimademimi/splitfp/blob/master/splitfp.tar.gz
-tar -zxvf splitfp.tar.gz
+wget https://github.com/caonimademimi/splitfp/archive/v1.1.0.tar.gz
+tar -zxvf v1.1.0.tar.gz
 cd splitfp 
-chmod 755 -R * 
-./splitfp -h
+chmod 755 splitfp
 </code></pre>
 
 ## Instructions
