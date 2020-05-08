@@ -1,5 +1,13 @@
-# Splitfp can mainly split multiple fastq or fasta files by the specified number of reads.
+# Splitfp
+Splitfp is a software that can split the second and third generation sequencing data.
 ## Installation
+Installation method 1
+<pre><code>
+git clone https://github.com/caonimademimi/splitfp.git
+cd splitfp
+chmod 755 splitfp
+</code></pre>
+Installation method 2
 <pre><code>
 wget https://github.com/caonimademimi/splitfp/blob/master/splitfp.tar.gz
 tar -zxvf splitfp.tar.gz
