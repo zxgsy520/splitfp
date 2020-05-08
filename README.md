@@ -17,26 +17,30 @@ chmod 755 -R *
 </code></pre>
 
 ## Instructions
-<pre><code>usage: splitfp [-h] -i FILE [-w FILE] [-n INT] [-o STR] 
+<pre><code>usage: splitfp [-h] -r1 FILE [FILE ...] [-r2 FILE [FILE ...]] [-w FILE]
+               [-n INT] [-o STR]
 
-name: 
-    splitfp.py  Split a specific format for multiple files. 
+name:
+    splitfp.py  Split a specific format for multiple files.
 
-attention: 
-    splitfp.py -i fasta.list 
-    splitfp.py -i fasta.list -n 100000 -o name 
+attention:
+    splitfp.py -r1 ngs.r1.fq -r2 ngs.r1.fq
+    splitfp.py -r1 tgs.reads.fq
 
-version: 0.1.0 
-contact:  Xingguo Zhang <113178210@qq.com> 
+version: 1.1.0
+contact:  Xingguo Zhang <113178210@qq.com>        
 
-optional arguments: 
-  -h, --help            show this help message and exit 
-  -i FILE, --input FILE 
-                        Set the input file. 
-  -w FILE, --workdir FILE 
-                        Set the output file path, default=. 
-  -n INT, --number INT  Set the number of reads after splitting the file, 
-                        default=200000 
-  -o STR, --out STR     Set the prefix of the output file. 
-  ./splitfp -h
+optional arguments:
+  -h, --help            show this help message and exit
+  -r1 FILE [FILE ...], --read1 FILE [FILE ...]
+                        Input R1 data, if it is three-generation sequencing,
+                        enter the reads sequence.
+  -r2 FILE [FILE ...], --read2 FILE [FILE ...]
+                        Input R2 data, not input if it is three-generation
+                        sequencing.
+  -w FILE, --workdir FILE
+                        Set the output file path, default=.
+  -n INT, --number INT  Set the number of reads after splitting the file,
+                        default=200000
+  -o STR, --out STR     Set the prefix of the output file.
 </code></pre>
