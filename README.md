@@ -12,7 +12,7 @@ Installation method 2
 <pre><code>
 wget https://github.com/zxgsy520/splitfp/archive/v1.1.0.tar.gz
 tar -zxvf v1.1.0.tar.gz
-cd splitfp 
+cd splitfp-1.1.0
 chmod 755 splitfp
 </code></pre>
 
