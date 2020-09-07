@@ -10,15 +10,15 @@ chmod 755 splitfp
 
 Installation method 2
 <pre><code>
-wget https://github.com/zxgsy520/splitfp/archive/v1.1.0.tar.gz
+wget https://github.com/zxgsy520/splitfp/archive/v2.1.0.tar.gz
 tar -zxvf v1.1.0.tar.gz
 cd splitfp-1.1.0
 chmod 755 splitfp
 </code></pre>
 
 ## Instructions
-<pre><code>usage: splitfp [-h] -r1 FILE [FILE ...] [-r2 FILE [FILE ...]] [-w FILE]
-               [-n INT] [-o STR]
+<pre><code>
+usage: splitfp [-h] -r1 FILE [FILE ...] [-r2 FILE [FILE ...]] [-w FILE] [-n INT] [-o STR]
 
 name:
     splitfp.py  Split a specific format for multiple files.
@@ -27,20 +27,17 @@ attention:
     splitfp.py -r1 ngs.r1.fq -r2 ngs.r1.fq
     splitfp.py -r1 tgs.reads.fq
 
-version: 1.1.0
+version: 2.1.0
 contact:  Xingguo Zhang <113178210@qq.com>        
 
 optional arguments:
   -h, --help            show this help message and exit
   -r1 FILE [FILE ...], --read1 FILE [FILE ...]
-                        Input R1 data, if it is three-generation sequencing,
-                        enter the reads sequence.
+                        Input R1 data, if it is three-generation sequencing, enter the reads sequence.
   -r2 FILE [FILE ...], --read2 FILE [FILE ...]
-                        Input R2 data, not input if it is three-generation
-                        sequencing.
+                        Input R2 data, not input if it is three-generation sequencing.
   -w FILE, --workdir FILE
                         Set the output file path, default=.
-  -n INT, --number INT  Set the number of reads after splitting the file,
-                        default=200000
+  -n INT, --number INT  Set the number of reads after splitting the file, default=200000
   -o STR, --out STR     Set the prefix of the output file.
 </code></pre>
