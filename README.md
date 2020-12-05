@@ -10,9 +10,9 @@ chmod 755 splitfp
 
 Installation method 2
 <pre><code>
-wget https://github.com/zxgsy520/splitfp/archive/v2.2.0.tar.gz
-tar -zxvf v2.2.0.tar.gz
-cd splitfp-2.2.0
+wget https://github.com/zxgsy520/splitfp/archive/v2.2.1.tar.gz
+tar -zxvf v2.2.1.tar.gz
+cd splitfp-2.2.1
 chmod 755 splitfp
 </code></pre>
 
@@ -27,7 +27,7 @@ attention:
     splitfp.py -r1 ngs.r1.fq -r2 ngs.r1.fq
     splitfp.py -r1 tgs.reads.fq
 
-version: 2.2.0
+version: 2.2.1
 contact:  Xingguo Zhang <113178210@qq.com>        
 
 optional arguments:
