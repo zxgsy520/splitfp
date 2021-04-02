@@ -10,14 +10,16 @@ import argparse
 
 LOG = logging.getLogger(__name__)
 
-__version__ = "2.2.1"
+__version__ = "2.2.3"
 __author__ = ("Xingguo Zhang",)
-__email__ = "113178210@qq.com"
+__email__ = "invicoun@foxmail.com"
 __all__ = []
 
 
 def read_fasta(file):
     '''Read fasta file'''
+
+    LOG.info("Reading message from %r" % file)
     if file.endswith(".gz"):
         fp = gzip.open(file)
     elif file.endswith(".fasta") or file.endswith(".fa"):
@@ -25,54 +27,55 @@ def read_fasta(file):
     else:
         raise Exception("%r file format error" % file)
 
-    seq = ''
-
+    seq = []
     for line in fp:
-        if type(line) == type(b''):
+        if isinstance(line, bytes):
             line = line.decode('utf-8')
-        line = line.strip()
-
+        line = line.strip().split()[0]
         if not line:
             continue
         if line.startswith(">"):
-            if seq!='':
+            if len(seq) == 2:
                 yield seq
-            seq = ''
-
-        seq += "%s\n" % line
-
-    if seq!='':
+            seq = [line, ""]
+        seq[1] += line
+    if len(seq) == 2:
         yield seq
+    fp.close()
 
 
 def read_fastq(file):
     '''Read fastq file'''
-    if file.endswith(".gz"):
+
+    LOG.info("Reading message from %r" % file)
+    if file.endswith("fastq.gz") or file.endswith(".fq.gz"):
         fp = gzip.open(file)
     elif file.endswith(".fastq") or file.endswith(".fq"):
         fp = open(file)
     else:
         raise Exception("%r file format error" % file)
 
-    seq = ''
-    n = 0
-
+    seq = []
     for line in fp:
-        if type(line) == type(b''):
+        if isinstance(line, bytes):
             line = line.decode('utf-8')
         line = line.strip()
 
         if not line:
             continue
-        n +=1
-        seq += "%s\n" % line
-        if n==4:
-            n=0
+        if not seq:
+            seq.append(line.strip("@").split()[0])
+            continue
+
+        seq.append(line)
+        if len(seq) == 4:
             yield seq
-            seq = ''
+            seq = []
+
+    fp.close()
 
 
-def split_fp(reads, workdir, name, number, format='fastq'):
+def split_fp(reads, workdir, name, number, format='fastq', minlen=1000):
 
     n = 0
     lable = 1
@@ -86,20 +89,24 @@ def split_fp(reads, workdir, name, number, format='fastq'):
             fh = read_fasta(i)
 
         for line in fh:
+            seqlen = len(line[1])
+            if seqlen < minlen:
+                LOG.info("%s\t%s" % (line[0], seqlen))
+                continue
             if n >= number:
-                output.write(line)
+                output.write("\n".join(line))
                 output.close()
                 n = 0
                 lable += 1
                 output = open('{}/{}.part_{}.{}'.format(workdir, name, lable, format), 'w')
 
-            output.write(line)
+            output.write("\n".join(line))
             n += 1
 
     output.close()
 
 
-def split_data(read1, read2, workdir, name, number):
+def split_data(read1, read2, workdir, name, number, minlen=1000):
 
     if not os.path.exists(workdir):
         os.makedirs(workdir)
@@ -124,8 +131,8 @@ def split_data(read1, read2, workdir, name, number):
         if len(read1)==0:
             raise Exception('Can not find the input file, please check the input file format.')
 
-        split_fp(read1, workdir, name1, number, format)
-        split_fp(read2, workdir, name2, number, format)
+        split_fp(read1, workdir, name1, number, format, minlen)
+        split_fp(read2, workdir, name2, number, format, minlen)
 
 
 def split_fq_help(parser):
@@ -138,6 +145,8 @@ def split_fq_help(parser):
         help='Set the output file path, default=.')
     parser.add_argument('-n', '--number', metavar='INT', type=int, default=200000,
         help='Set the number of reads after splitting the file, default=200000')
+    parser.add_argument('--minlen', metavar='INT', type=int, default=0,
+        help='Filter the length of the sequence, default=0')
     parser.add_argument('-o', '--out', metavar='STR', type=str, default='out',
         help='Set the prefix of the output file.')
 
@@ -160,14 +169,14 @@ name:
 attention:
     splitfp -r1 ngs.r1.fq -r2 ngs.r1.fq
     splitfp -r1 tgs.reads.fq
-
+    splitfp -r1 tgs.reads.fq --minlen 1000
 version: %s
 contact:  %s <%s>\
         ''' % (__version__, ' '.join(__author__), __email__))
 
     args = split_fq_help(parser).parse_args()
 
-    split_data(args.read1, args.read2, args.workdir, args.out, args.number)
+    split_data(args.read1, args.read2, args.workdir, args.out, args.number, args.minlen)
 
 
 if __name__ == "__main__":
