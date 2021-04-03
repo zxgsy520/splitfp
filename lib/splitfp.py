@@ -64,7 +64,7 @@ def read_fastq(file):
         if not line:
             continue
         if not seq:
-            seq.append(line.strip("@").split()[0])
+            seq.append(line.split()[0])
             continue
 
         seq.append(line)
