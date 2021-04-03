@@ -94,13 +94,13 @@ def split_fp(reads, workdir, name, number, format='fastq', minlen=1000):
                 LOG.info("%s\t%s" % (line[0], seqlen))
                 continue
             if n >= number:
-                output.write("\n".join(line))
+                output.write("%s\n" % "\n".join(line))
                 output.close()
                 n = 0
                 lable += 1
                 output = open('{}/{}.part_{}.{}'.format(workdir, name, lable, format), 'w')
 
-            output.write("\n".join(line))
+            output.write("%s\n" % "\n".join(line))
             n += 1
 
     output.close()
