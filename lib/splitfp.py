@@ -31,14 +31,16 @@ def read_fasta(file):
     for line in fp:
         if isinstance(line, bytes):
             line = line.decode('utf-8')
-        line = line.strip().split()[0]
+        line = line.strip()
         if not line:
             continue
         if line.startswith(">"):
             if len(seq) == 2:
                 yield seq
-            seq = [line, ""]
+            seq = [line.split()[0], ""]
+            continue
         seq[1] += line
+
     if len(seq) == 2:
         yield seq
     fp.close()
@@ -99,6 +101,7 @@ def split_fp(reads, workdir, name, number, format='fastq', minlen=1000):
                 n = 0
                 lable += 1
                 output = open('{}/{}.part_{}.{}'.format(workdir, name, lable, format), 'w')
+                continue
 
             output.write("%s\n" % "\n".join(line))
             n += 1
@@ -121,7 +124,7 @@ def split_data(read1, read2, workdir, name, number, minlen=1000):
         else:
             format = 'fasta'
 
-        split_fp(read1, workdir, name, number, format)
+        split_fp(read1, workdir, name, number, format, minlen)
 
     else:
         format = 'fastq'
